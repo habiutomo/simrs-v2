@@ -32,17 +32,16 @@ interface SidebarLinkProps {
 
 const SidebarLink = ({ href, icon, children, active }: SidebarLinkProps) => {
   return (
-    <a href={href} className="no-underline">
-      <div 
-        className={cn(
-          "flex items-center px-4 py-2 text-gray-600 rounded-md group transition-colors cursor-pointer",
-          active ? "bg-blue-50 text-blue-600 border-l-2 border-blue-600" : "hover:bg-gray-50"
-        )}
-      >
-        <span className="w-5 h-5 mr-3">{icon}</span>
-        {children}
-      </div>
-    </a>
+    <div
+      onClick={() => window.location.href = href}
+      className={cn(
+        "flex items-center px-4 py-2 text-gray-600 rounded-md group transition-colors cursor-pointer",
+        active ? "bg-blue-50 text-blue-600 border-l-2 border-blue-600" : "hover:bg-gray-50"
+      )}
+    >
+      <span className="w-5 h-5 mr-3">{icon}</span>
+      {children}
+    </div>
   );
 };
 
