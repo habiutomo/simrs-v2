@@ -75,6 +75,7 @@ const Sidebar = () => {
     // HR Modules
     { label: "Kepegawaian (HRD)", href: "/hr", icon: <UserCog className="w-5 h-5" /> },
     { label: "Payroll", href: "/payroll", icon: <Briefcase className="w-5 h-5" /> },
+    { label: "Laporan SDM", href: "/hr-reports", icon: <FileText className="w-5 h-5" /> },
     // Reports & System
     { label: "Laporan & Analitik", href: "/reports", icon: <BarChart className="w-5 h-5" /> },
     { label: "Integrasi Sistem", href: "/system-integration", icon: <Zap className="w-5 h-5" /> },
