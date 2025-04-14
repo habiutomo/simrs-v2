@@ -3,14 +3,42 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  ShoppingCart, 
+  ShoppingCart,
   ClipboardCheck, 
   PackageCheck, 
   Receipt, 
-  Search 
+  Search,
+  Filter,
+  Plus,
+  FileUp,
+  Download,
+  Eye,
+  Building2,
+  Calendar,
+  BarChart,
+  FileText,
+  Truck,
+  Pencil,
+  CheckCircle2,
+  AlertCircle,
+  MoreHorizontal,
+  DollarSign,
+  Users
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
 
 const Procurement = () => {
   const dummyPurchaseRequests = [

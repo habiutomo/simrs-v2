@@ -38,6 +38,9 @@ interface PayslipData {
 }
 
 const PayslipPreviewDialog = ({ slip }: { slip: PayslipData }) => {
+  const formatCurrency = (amount: number) => {
+    return `Rp ${amount.toLocaleString('id-ID')}`;
+  };
   return (
     <Dialog>
       <DialogTrigger asChild>
