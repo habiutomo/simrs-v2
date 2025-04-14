@@ -12,8 +12,157 @@ import {
   FileText,
   BanknoteIcon,
   Clock,
-  CalendarDays
+  CalendarDays,
+  Download,
+  EyeIcon,
+  Mail,
+  Filter,
+  Plus,
+  CheckCircle2
 } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+
+// Komponen dialog preview slip gaji
+interface PayslipData {
+  id: string;
+  employeeId: string;
+  employeeName: string;
+  position: string;
+  department: string;
+  period: string;
+  amount: number;
+  status: string;
+}
+
+const PayslipPreviewDialog = ({ slip }: { slip: PayslipData }) => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="sm">
+          <EyeIcon className="h-4 w-4 mr-2" />
+          Detail
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[600px]">
+        <DialogHeader>
+          <DialogTitle>Slip Gaji Digital</DialogTitle>
+          <DialogDescription>
+            Periode: {slip.period}
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="space-y-4">
+          {/* Header Slip Gaji */}
+          <div className="flex flex-col items-center border-b pb-4">
+            <h2 className="text-xl font-bold">Rumah Sakit Sehat Sentosa</h2>
+            <p className="text-sm text-gray-500">Jl. Kesehatan No. 123, Jakarta Selatan</p>
+            <h3 className="mt-2 font-semibold">SLIP GAJI KARYAWAN</h3>
+            <p className="text-sm">Periode: {slip.period}</p>
+          </div>
+          
+          {/* Informasi Karyawan */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm text-gray-500">ID Karyawan</p>
+              <p className="font-medium">{slip.employeeId}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Nama Karyawan</p>
+              <p className="font-medium">{slip.employeeName}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Jabatan</p>
+              <p className="font-medium">{slip.position}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Departemen</p>
+              <p className="font-medium">{slip.department}</p>
+            </div>
+          </div>
+          
+          <Separator />
+          
+          {/* Pendapatan */}
+          <div>
+            <h4 className="font-medium text-blue-600 mb-2">Pendapatan</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Gaji Pokok</span>
+                <span>Rp 15.000.000</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Tunjangan Jabatan</span>
+                <span>Rp 5.000.000</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Tunjangan Kesehatan</span>
+                <span>Rp 2.000.000</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Insentif Kinerja</span>
+                <span>Rp 3.000.000</span>
+              </div>
+              <div className="flex justify-between font-semibold border-t pt-1">
+                <span>Total Pendapatan</span>
+                <span>Rp 25.000.000</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Potongan */}
+          <div>
+            <h4 className="font-medium text-red-600 mb-2">Potongan</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>PPh 21</span>
+                <span>Rp 2.250.000</span>
+              </div>
+              <div className="flex justify-between">
+                <span>BPJS Kesehatan</span>
+                <span>Rp 150.000</span>
+              </div>
+              <div className="flex justify-between">
+                <span>BPJS Ketenagakerjaan</span>
+                <span>Rp 100.000</span>
+              </div>
+              <div className="flex justify-between font-semibold border-t pt-1">
+                <span>Total Potongan</span>
+                <span>Rp 2.500.000</span>
+              </div>
+            </div>
+          </div>
+          
+          <Separator />
+          
+          {/* Total Diterima */}
+          <div className="bg-blue-50 p-3 rounded-md border border-blue-200">
+            <div className="flex justify-between font-bold">
+              <span>TOTAL GAJI DITERIMA</span>
+              <span>{slip.amount === 22500000 ? 'Rp 22.500.000' : formatCurrency(slip.amount)}</span>
+            </div>
+            <p className="text-xs text-blue-600 mt-1">Telah ditransfer ke rekening Bank Mandiri ****4567 pada tanggal 28 Maret 2025</p>
+          </div>
+          
+          <div className="text-center text-xs text-gray-500">
+            <p>Slip gaji ini digenerate secara otomatis dan valid tanpa tanda tangan.</p>
+            <p>Jika ada pertanyaan, hubungi Departemen SDM di ext. 2345 atau email hr@rssehatsentosa.com</p>
+          </div>
+        </div>
+        
+        <DialogFooter>
+          <Button variant="outline">
+            <Download className="mr-2 h-4 w-4" />
+            Unduh PDF
+          </Button>
+          <Button>Tutup</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 const Payroll = () => {
   const dummyPayroll = [
@@ -213,9 +362,25 @@ const Payroll = () => {
           </TabsContent>
           
           <TabsContent value="slips">
-            <Card>
-              <CardHeader>
+            <Card className="mb-6">
+              <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Slip Gaji</CardTitle>
+                <div className="flex gap-2">
+                  <Select defaultValue="march-2025">
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Pilih periode" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="march-2025">Maret 2025</SelectItem>
+                      <SelectItem value="february-2025">Februari 2025</SelectItem>
+                      <SelectItem value="january-2025">Januari 2025</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button variant="outline">
+                    <Filter className="h-4 w-4 mr-2" />
+                    Filter
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent>
                 <Table>
@@ -227,6 +392,7 @@ const Payroll = () => {
                       <TableHead>Periode</TableHead>
                       <TableHead>Total Gaji</TableHead>
                       <TableHead>Status</TableHead>
+                      <TableHead className="text-right">Aksi</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -241,43 +407,333 @@ const Payroll = () => {
                         <TableCell>{slip.period}</TableCell>
                         <TableCell>{formatCurrency(slip.amount)}</TableCell>
                         <TableCell>{getStatusBadge(slip.status)}</TableCell>
+                        <TableCell className="text-right">
+                          <PayslipPreviewDialog slip={slip} />
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </CardContent>
             </Card>
-          </TabsContent>
-          
-          <TabsContent value="components">
+            
+            {/* Pengiriman Slip Gaji */}
             <Card>
               <CardHeader>
-                <CardTitle>Komponen Gaji</CardTitle>
+                <CardTitle>Pengiriman Slip Gaji</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8">
-                  <PieChart className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900">Komponen Gaji</h3>
-                  <p className="mt-1 text-sm text-gray-500">
-                    Pilih karyawan untuk melihat detail komponen gaji
-                  </p>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 bg-blue-50 rounded-md">
+                    <div>
+                      <h3 className="font-medium text-blue-700">Slip Gaji Maret 2025</h3>
+                      <p className="text-sm text-blue-600">243 slip gaji siap dikirim</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline">
+                        <Download className="h-4 w-4 mr-2" />
+                        Download Semua
+                      </Button>
+                      <Button>
+                        <Mail className="h-4 w-4 mr-2" />
+                        Kirim Email
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between bg-gray-50 p-4 rounded-md border">
+                    <div className="text-sm text-gray-600">
+                      <div className="font-medium">Status Pengiriman:</div>
+                      <div>Dikirim: <span className="font-medium text-green-600">243</span></div>
+                      <div>Belum Dilihat: <span className="font-medium text-yellow-600">78</span></div>
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      <div className="font-medium">Detail Pengiriman:</div>
+                      <div>Tanggal Kirim: 28/03/2025</div>
+                      <div>Metode: Email</div>
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      <div className="font-medium">Riwayat:</div>
+                      <div>Terakhir Diperbarui: 28/03/2025 14:30</div>
+                      <div>Oleh: Admin HR</div>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
           
+          <TabsContent value="components">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="md:col-span-1">
+                <CardHeader>
+                  <CardTitle>Komponen Gaji</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-sm font-medium mb-2">Pilih Jabatan</h3>
+                      <Select defaultValue="dokter">
+                        <SelectTrigger>
+                          <SelectValue placeholder="Pilih jabatan" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="dokter">Dokter</SelectItem>
+                          <SelectItem value="perawat">Perawat</SelectItem>
+                          <SelectItem value="staff">Staff Administrasi</SelectItem>
+                          <SelectItem value="teknisi">Teknisi</SelectItem>
+                          <SelectItem value="manager">Manager</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-sm font-medium mb-2">Pilih Departemen</h3>
+                      <Select defaultValue="all">
+                        <SelectTrigger>
+                          <SelectValue placeholder="Pilih departemen" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Semua Departemen</SelectItem>
+                          <SelectItem value="pediatrics">Pediatrik</SelectItem>
+                          <SelectItem value="icu">ICU</SelectItem>
+                          <SelectItem value="radiology">Radiologi</SelectItem>
+                          <SelectItem value="pharmacy">Farmasi</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <Button className="w-full">
+                      <Search className="mr-2 h-4 w-4" />
+                      Tampilkan Komponen
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="md:col-span-2">
+                <CardHeader>
+                  <CardTitle>Detail Komponen Gaji - Dokter</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div className="space-y-3">
+                      <h3 className="font-medium text-blue-600">Pendapatan</h3>
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3 font-medium">Komponen</div>
+                        <div className="col-span-2 font-medium">Nominal</div>
+                        <div className="col-span-1 font-medium">Tipe</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3">Gaji Pokok</div>
+                        <div className="col-span-2">Rp 15.000.000</div>
+                        <div className="col-span-1">Fixed</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3">Tunjangan Jabatan</div>
+                        <div className="col-span-2">Rp 5.000.000</div>
+                        <div className="col-span-1">Fixed</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3">Tunjangan Kesehatan</div>
+                        <div className="col-span-2">Rp 2.000.000</div>
+                        <div className="col-span-1">Fixed</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3">Insentif Kinerja</div>
+                        <div className="col-span-2">Rp 3.000.000</div>
+                        <div className="col-span-1">Variable</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b bg-gray-50">
+                        <div className="col-span-3 font-medium">Total Pendapatan</div>
+                        <div className="col-span-2 font-medium">Rp 25.000.000</div>
+                        <div className="col-span-1"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      <h3 className="font-medium text-red-600">Potongan</h3>
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3 font-medium">Komponen</div>
+                        <div className="col-span-2 font-medium">Nominal</div>
+                        <div className="col-span-1 font-medium">Tipe</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3">PPh 21</div>
+                        <div className="col-span-2">Rp 2.250.000</div>
+                        <div className="col-span-1">%</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3">BPJS Kesehatan</div>
+                        <div className="col-span-2">Rp 150.000</div>
+                        <div className="col-span-1">%</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b">
+                        <div className="col-span-3">BPJS Ketenagakerjaan</div>
+                        <div className="col-span-2">Rp 100.000</div>
+                        <div className="col-span-1">%</div>
+                      </div>
+                      
+                      <div className="grid grid-cols-6 py-2 border-b bg-gray-50">
+                        <div className="col-span-3 font-medium">Total Potongan</div>
+                        <div className="col-span-2 font-medium">Rp 2.500.000</div>
+                        <div className="col-span-1"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-6 py-2 bg-blue-50 rounded-md border-blue-200 border">
+                      <div className="col-span-3 font-bold">TOTAL DITERIMA</div>
+                      <div className="col-span-2 font-bold">Rp 22.500.000</div>
+                      <div className="col-span-1"></div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+          
           <TabsContent value="reports">
-            <Card>
-              <CardHeader>
-                <CardTitle>Laporan Pajak PPh 21</CardTitle>
+            <Card className="mb-6">
+              <CardHeader className="flex justify-between items-start">
+                <div>
+                  <CardTitle>Laporan Pajak PPh 21</CardTitle>
+                  <p className="text-sm text-gray-500 mt-1">Periode Tahun 2025</p>
+                </div>
+                <div className="flex gap-2">
+                  <Select defaultValue="2025">
+                    <SelectTrigger className="w-[150px]">
+                      <SelectValue placeholder="Pilih tahun" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="2025">2025</SelectItem>
+                      <SelectItem value="2024">2024</SelectItem>
+                      <SelectItem value="2023">2023</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button variant="outline">
+                    <FileText className="h-4 w-4 mr-2" />
+                    Export
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8">
-                  <FileText className="mx-auto h-12 w-12 text-gray-400" />
-                  <h3 className="mt-2 text-sm font-medium text-gray-900">Laporan Pajak PPh 21</h3>
-                  <p className="mt-1 text-sm text-gray-500">
-                    Pilih periode untuk melihat laporan pajak penghasilan
-                  </p>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Bulan</TableHead>
+                      <TableHead>Total Gaji Bruto</TableHead>
+                      <TableHead>Total PPh 21</TableHead>
+                      <TableHead>Jumlah Karyawan</TableHead>
+                      <TableHead>Status Pelaporan</TableHead>
+                      <TableHead className="text-right">Aksi</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>Maret 2025</TableCell>
+                      <TableCell>{formatCurrency(1245000000)}</TableCell>
+                      <TableCell>{formatCurrency(112050000)}</TableCell>
+                      <TableCell>243</TableCell>
+                      <TableCell>{getStatusBadge('paid')}</TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm">
+                          <EyeIcon className="h-4 w-4 mr-2" />
+                          Detail
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Februari 2025</TableCell>
+                      <TableCell>{formatCurrency(1235000000)}</TableCell>
+                      <TableCell>{formatCurrency(111150000)}</TableCell>
+                      <TableCell>240</TableCell>
+                      <TableCell>{getStatusBadge('paid')}</TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm">
+                          <EyeIcon className="h-4 w-4 mr-2" />
+                          Detail
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Januari 2025</TableCell>
+                      <TableCell>{formatCurrency(1230000000)}</TableCell>
+                      <TableCell>{formatCurrency(110700000)}</TableCell>
+                      <TableCell>238</TableCell>
+                      <TableCell>{getStatusBadge('paid')}</TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="ghost" size="sm">
+                          <EyeIcon className="h-4 w-4 mr-2" />
+                          Detail
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+            
+            {/* Formulir SPT PPh 21 */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Formulir Pelaporan Pajak</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4 border rounded-md p-4">
+                  <div className="flex items-center justify-between border-b pb-4">
+                    <div>
+                      <h3 className="font-medium">SPT Masa PPh 21 - Maret 2025</h3>
+                      <p className="text-sm text-gray-500">Status: Sudah Dilaporkan</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline">
+                        <Download className="h-4 w-4 mr-2" />
+                        Download PDF
+                      </Button>
+                      <Button className="bg-green-600 hover:bg-green-700">
+                        <CheckCircle2 className="h-4 w-4 mr-2" />
+                        Terkirim
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between border-b pb-4">
+                    <div>
+                      <h3 className="font-medium">SPT Tahunan PPh 21 - 2024</h3>
+                      <p className="text-sm text-gray-500">Status: Draft</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline">
+                        <EyeIcon className="h-4 w-4 mr-2" />
+                        Preview
+                      </Button>
+                      <Button>
+                        <FileText className="h-4 w-4 mr-2" />
+                        Edit
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-medium">Bukti Potong PPh 21 (1721-A1)</h3>
+                      <p className="text-sm text-gray-500">Periode: Januari - Desember 2024</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline">
+                        <Plus className="h-4 w-4 mr-2" />
+                        Buat Baru
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
