@@ -1,5 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/context/AuthContext";
+
+import { Menu } from "lucide-react";
+
 import { 
   Home, 
   Users, 
@@ -48,6 +51,7 @@ const SidebarLink = ({ href, icon, children, active }: SidebarLinkProps) => {
 const Sidebar = () => {
   const [location] = useLocation();
   const { user } = useAuth();
+  const [isOpen, setIsOpen] = React.useState(false);
   
   const getInitials = (name: string) => {
     return name
@@ -81,7 +85,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200">
+    <aside className={`${isOpen ? 'flex' : 'hidden'} md:flex flex-col w-64 bg-white border-r border-gray-200 fixed md:static top-0 left-0 h-full z-30`}>
       <div className="flex items-center justify-center h-16 border-b border-gray-200 px-4">
         <div className="flex items-center space-x-2">
           <ScrollText className="w-8 h-8 text-blue-600" />
@@ -124,3 +128,11 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
+      <button 
+        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded-md hover:bg-gray-100"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <Menu className="w-6 h-6" />
+      </button>
