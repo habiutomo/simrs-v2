@@ -48,7 +48,7 @@ const SidebarLink = ({ href, icon, children, active }: SidebarLinkProps) => {
 const Sidebar = () => {
   const [location] = useLocation();
   const { user } = useAuth();
-
+  
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -78,7 +78,6 @@ const Sidebar = () => {
     // Reports & System
     { label: "Laporan & Analitik", href: "/reports", icon: <BarChart className="w-5 h-5" /> },
     { label: "Integrasi Sistem", href: "/system-integration", icon: <Zap className="w-5 h-5" /> },
-    { label: "Rehabilitasi Medik", href: "/rehabilitation", icon: <Activity className="w-5 h-5" />} // Added Rehabilitation item
   ];
 
   return (
@@ -89,7 +88,7 @@ const Sidebar = () => {
           <span className="text-xl font-bold text-blue-600">SIMRS</span>
         </div>
       </div>
-
+      
       <div className="flex flex-col flex-grow overflow-y-auto">
         <div className="flex flex-col py-4">
           <div className="px-4 py-2">
@@ -106,7 +105,7 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-
+        
         <nav className="flex-1 px-2 py-4 space-y-1 text-sm">
           {navItems.map((item) => (
             <SidebarLink

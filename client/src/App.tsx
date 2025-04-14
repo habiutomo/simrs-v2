@@ -75,7 +75,6 @@ function AppContent() {
             {/* HR modules */}
             <Route path="/hr" component={HR} />
             <Route path="/payroll" component={Payroll} />
-            <Route path="/rehabilitation" component={Rehabilitation} />
             {/* Reports & System */}
             <Route path="/reports" component={Reports} />
             <Route path="/system-integration" component={SystemIntegration} />
