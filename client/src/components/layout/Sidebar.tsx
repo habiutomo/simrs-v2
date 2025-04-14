@@ -32,7 +32,7 @@ interface SidebarLinkProps {
 
 const SidebarLink = ({ href, icon, children, active }: SidebarLinkProps) => {
   return (
-    <Link href={href}>
+    <a href={href} className="no-underline">
       <div 
         className={cn(
           "flex items-center px-4 py-2 text-gray-600 rounded-md group transition-colors cursor-pointer",
@@ -42,7 +42,7 @@ const SidebarLink = ({ href, icon, children, active }: SidebarLinkProps) => {
         <span className="w-5 h-5 mr-3">{icon}</span>
         {children}
       </div>
-    </Link>
+    </a>
   );
 };
 

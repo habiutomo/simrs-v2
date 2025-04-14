@@ -126,7 +126,27 @@ const Reports = () => {
       <div className="px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Laporan & Analitik</h1>
-          <Button>
+          <Button
+            onClick={() => {
+              // Export all reports as CSV
+              const data = [
+                ['ID', 'Nama Laporan', 'Periode', 'Status'],
+                ...regulatoryReportsList.map(report => [
+                  report.id,
+                  report.name,
+                  report.period,
+                  report.status
+                ])
+              ].map(row => row.join(',')).join('\n');
+              
+              const blob = new Blob([data], { type: 'text/csv' });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'daftar-laporan-regulasi.csv';
+              a.click();
+            }}
+          >
             <Download className="mr-2 h-4 w-4" />
             Export Laporan
           </Button>
@@ -196,7 +216,24 @@ const Reports = () => {
                     </Select>
                   </div>
                   
-                  <Button className="w-full">
+                  <Button 
+                    className="w-full"
+                    onClick={() => {
+                      // Here we would normally make an API call
+                      // For now simulate report generation
+                      const category = "patient";
+                      const period = "month";
+                      const format = "pdf";
+                      
+                      // Simulate download with dummy data
+                      const blob = new Blob(['Dummy Report Data'], { type: 'application/pdf' });
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `laporan-${category}-${period}.${format}`;
+                      a.click();
+                    }}
+                  >
                     <FileText className="mr-2 h-4 w-4" />
                     Generate Laporan
                   </Button>
