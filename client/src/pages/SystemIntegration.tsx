@@ -64,6 +64,7 @@ const SystemIntegration = () => {
                   <IntegrationStatus name="BPJS Ketenagakerjaan" connected={false} />
                   <IntegrationStatus name="Sistem Rujukan Nasional" connected={true} />
                   <IntegrationStatus name="Kementerian Kesehatan" connected={false} />
+                  <IntegrationStatus name="Kementerian Kesehatan" connected={false} />
                   <IntegrationStatus name="Prudential" connected={false} />
                   <IntegrationStatus name="Allianz" connected={false} />
                   <IntegrationStatus name="AXA Insurance" connected={false} />
