@@ -11,8 +11,13 @@ import {
   Users,
   GraduationCap,
   Calendar,
-  UserPlus
+  UserPlus,
+  Download,
+  FilePlus
 } from "lucide-react";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const HR = () => {
   const dummyEmployees = [
@@ -113,10 +118,85 @@ const HR = () => {
       <div className="px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Kepegawaian (HRD)</h1>
-          <Button>
-            <UserPlus className="mr-2 h-4 w-4" />
-            Tambah Karyawan
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={() => {
+              // Export functionality will be added here
+              const csvContent = dummyEmployees
+                .map(e => [e.id, e.name, e.position, e.department, e.joinDate, e.status].join(','))
+                .join('\n');
+              const blob = new Blob([`ID,Nama,Jabatan,Departemen,Tanggal Bergabung,Status\n${csvContent}`], { type: 'text/csv' });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'laporan-karyawan.csv';
+              a.click();
+            }}>
+              <Download className="mr-2 h-4 w-4" />
+              Export CSV
+            </Button>
+            <Button>
+              <FilePlus className="mr-2 h-4 w-4" />
+              Generate Laporan
+            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>
+                  <UserPlus className="mr-2 h-4 w-4" />
+                  Tambah Karyawan
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Tambah Karyawan Baru</DialogTitle>
+                </DialogHeader>
+                <form className="space-y-4">
+                  <div>
+                    <Label htmlFor="name">Nama Lengkap</Label>
+                    <Input id="name" />
+                  </div>
+                  <div>
+                    <Label htmlFor="position">Jabatan</Label>
+                    <Input id="position" />
+                  </div>
+                  <div>
+                    <Label htmlFor="department">Departemen</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Pilih departemen" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="pediatrics">Pediatrics</SelectItem>
+                        <SelectItem value="icu">ICU</SelectItem>
+                        <SelectItem value="radiology">Radiology</SelectItem>
+                        <SelectItem value="emergency">Emergency</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="joinDate">Tanggal Bergabung</Label>
+                    <Input type="date" id="joinDate" />
+                  </div>
+                  <div>
+                    <Label htmlFor="contract">Jenis Kontrak</Label>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Pilih jenis kontrak" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="permanent">Permanent</SelectItem>
+                        <SelectItem value="contract">Kontrak</SelectItem>
+                        <SelectItem value="internship">Magang</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </form>
+                <DialogFooter>
+                  <Button variant="outline" onClick={() => {}}>Batal</Button>
+                  <Button onClick={() => {}}>Simpan</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
