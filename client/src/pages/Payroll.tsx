@@ -24,6 +24,108 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { Progress } from "@/components/ui/progress";
+import { Switch } from "@/components/ui/switch";
+
+// Komponen dialog proses gaji
+const ProcessPayrollDialog = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>
+          <Calculator className="mr-2 h-4 w-4" />
+          Proses Gaji Bulan Ini
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[600px]">
+        <DialogHeader>
+          <DialogTitle>Proses Penggajian Bulan April 2025</DialogTitle>
+          <DialogDescription>
+            Silahkan pilih opsi penggajian dan tekan Hitung untuk menjalankan proses perhitungan gaji
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <h3 className="font-medium">Periode Gaji</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label>Tanggal Mulai</Label>
+                <Input type="date" value="2025-04-01" />
+              </div>
+              <div>
+                <Label>Tanggal Akhir</Label>
+                <Input type="date" value="2025-04-30" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="space-y-3">
+            <h3 className="font-medium">Opsi Penggajian</h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="include-tax" className="cursor-pointer">Hitung PPh 21</Label>
+                <Switch id="include-tax" defaultChecked />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <Label htmlFor="include-bpjs" className="cursor-pointer">Hitung BPJS</Label>
+                <Switch id="include-bpjs" defaultChecked />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <Label htmlFor="include-attendance" className="cursor-pointer">Hitung Potongan Absensi</Label>
+                <Switch id="include-attendance" defaultChecked />
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <Label htmlFor="include-incentives" className="cursor-pointer">Hitung Insentif & Bonus</Label>
+                <Switch id="include-incentives" defaultChecked />
+              </div>
+            </div>
+          </div>
+          
+          <div className="space-y-3">
+            <h3 className="font-medium">Detail Penggajian</h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span>Total Karyawan:</span>
+                <span className="font-medium">245 Orang</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Estimasi Total Gaji:</span>
+                <span className="font-medium">Rp 1.250.000.000</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Tanggal Pembayaran:</span>
+                <Input type="date" value="2025-04-28" className="w-40" />
+              </div>
+            </div>
+          </div>
+          
+          <div className="space-y-3">
+            <h3 className="font-medium">Status Perhitungan</h3>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span>0 dari 245 karyawan selesai diproses</span>
+                <span>0%</span>
+              </div>
+              <Progress value={0} className="h-2" />
+            </div>
+          </div>
+        </div>
+        
+        <DialogFooter className="mt-6">
+          <Button variant="outline">Batal</Button>
+          <Button>
+            <Calculator className="mr-2 h-4 w-4" />
+            Mulai Perhitungan
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 // Komponen dialog preview slip gaji
 interface PayslipData {
@@ -257,10 +359,7 @@ const Payroll = () => {
       <div className="px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Penggajian (Payroll)</h1>
-          <Button>
-            <Calculator className="mr-2 h-4 w-4" />
-            Proses Gaji Bulan Ini
-          </Button>
+          <ProcessPayrollDialog />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">

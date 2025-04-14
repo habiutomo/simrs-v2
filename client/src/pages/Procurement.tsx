@@ -40,6 +40,433 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 
+// Komponen dialog Create PR
+const CreatePRDialog = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">
+          <ClipboardCheck className="mr-2 h-4 w-4" />
+          Buat PR
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[700px]">
+        <DialogHeader>
+          <DialogTitle>Buat Purchase Request Baru</DialogTitle>
+          <DialogDescription>
+            Silahkan isi informasi untuk pembuatan permintaan pembelian.
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="pr-number">No. PR</Label>
+              <Input id="pr-number" value="PR-2025-0043" disabled />
+              <p className="text-sm text-gray-500 mt-1">Nomor PR digenerate otomatis</p>
+            </div>
+            
+            <div>
+              <Label htmlFor="pr-date">Tanggal PR</Label>
+              <Input id="pr-date" type="date" defaultValue={new Date().toISOString().substring(0, 10)} />
+            </div>
+            
+            <div>
+              <Label htmlFor="pr-department">Departemen</Label>
+              <Select>
+                <SelectTrigger id="pr-department">
+                  <SelectValue placeholder="Pilih departemen" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="farmasi">Farmasi</SelectItem>
+                  <SelectItem value="laboratorium">Laboratorium</SelectItem>
+                  <SelectItem value="radiologi">Radiologi</SelectItem>
+                  <SelectItem value="icu">ICU</SelectItem>
+                  <SelectItem value="ugd">UGD</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="pr-requester">Pemohon</Label>
+              <Input id="pr-requester" placeholder="Nama pemohon" />
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="pr-priority">Prioritas</Label>
+              <Select>
+                <SelectTrigger id="pr-priority">
+                  <SelectValue placeholder="Pilih prioritas" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="normal">Normal</SelectItem>
+                  <SelectItem value="urgent">Urgent</SelectItem>
+                  <SelectItem value="critical">Critical</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="pr-required-date">Tanggal Dibutuhkan</Label>
+              <Input id="pr-required-date" type="date" />
+            </div>
+            
+            <div>
+              <Label htmlFor="pr-notes">Catatan</Label>
+              <Input id="pr-notes" placeholder="Catatan tambahan (opsional)" />
+            </div>
+            
+            <div>
+              <Label htmlFor="pr-attachment">Lampiran</Label>
+              <div className="flex gap-2 mt-1">
+                <Input id="pr-attachment" type="file" className="w-full" />
+                <Button variant="outline" size="icon">
+                  <FileUp className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-6">
+          <Label>Item Permintaan</Label>
+          <div className="rounded-md border mt-2">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Item</TableHead>
+                  <TableHead>Jumlah</TableHead>
+                  <TableHead>Satuan</TableHead>
+                  <TableHead>Catatan Item</TableHead>
+                  <TableHead></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <Input placeholder="Nama item" />
+                  </TableCell>
+                  <TableCell>
+                    <Input type="number" defaultValue="1" min="1" className="w-20" />
+                  </TableCell>
+                  <TableCell>
+                    <Select>
+                      <SelectTrigger className="w-24">
+                        <SelectValue placeholder="Satuan" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="box">Box</SelectItem>
+                        <SelectItem value="pcs">Pcs</SelectItem>
+                        <SelectItem value="unit">Unit</SelectItem>
+                        <SelectItem value="botol">Botol</SelectItem>
+                        <SelectItem value="roll">Roll</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+                  <TableCell>
+                    <Input placeholder="Catatan khusus" />
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="ghost" size="icon">
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <Input placeholder="Nama item" />
+                  </TableCell>
+                  <TableCell>
+                    <Input type="number" defaultValue="1" min="1" className="w-20" />
+                  </TableCell>
+                  <TableCell>
+                    <Select>
+                      <SelectTrigger className="w-24">
+                        <SelectValue placeholder="Satuan" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="box">Box</SelectItem>
+                        <SelectItem value="pcs">Pcs</SelectItem>
+                        <SelectItem value="unit">Unit</SelectItem>
+                        <SelectItem value="botol">Botol</SelectItem>
+                        <SelectItem value="roll">Roll</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+                  <TableCell>
+                    <Input placeholder="Catatan khusus" />
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="ghost" size="icon">
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+          
+          <Button variant="outline" className="mt-4">
+            <Plus className="h-4 w-4 mr-2" />
+            Tambah Item
+          </Button>
+        </div>
+        
+        <DialogFooter className="mt-6">
+          <Button variant="outline">Simpan Draft</Button>
+          <Button>Kirim PR</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+// Komponen dialog Create PO
+const CreatePODialog = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          Buat PO
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[800px]">
+        <DialogHeader>
+          <DialogTitle>Buat Purchase Order Baru</DialogTitle>
+          <DialogDescription>
+            Silahkan isi informasi untuk pembuatan Purchase Order baru.
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="po-number">No. PO</Label>
+              <Input id="po-number" value="PO-2025-0102" disabled />
+              <p className="text-sm text-gray-500 mt-1">Nomor PO digenerate otomatis</p>
+            </div>
+            
+            <div>
+              <Label htmlFor="po-date">Tanggal PO</Label>
+              <Input id="po-date" type="date" defaultValue={new Date().toISOString().substring(0, 10)} />
+            </div>
+            
+            <div>
+              <Label htmlFor="po-vendor">Supplier</Label>
+              <Select>
+                <SelectTrigger id="po-vendor">
+                  <SelectValue placeholder="Pilih supplier" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="pt-meditama">PT Meditama</SelectItem>
+                  <SelectItem value="cv-medika-utama">CV Medika Utama</SelectItem>
+                  <SelectItem value="pt-farma-abadi">PT Farma Abadi</SelectItem>
+                  <SelectItem value="cv-alkes-prima">CV Alkes Prima</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="po-delivery-date">Tanggal Pengiriman</Label>
+              <Input id="po-delivery-date" type="date" />
+            </div>
+            
+            <div>
+              <Label htmlFor="po-department">Departemen Tujuan</Label>
+              <Select>
+                <SelectTrigger id="po-department">
+                  <SelectValue placeholder="Pilih departemen" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="farmasi">Farmasi</SelectItem>
+                  <SelectItem value="laboratorium">Laboratorium</SelectItem>
+                  <SelectItem value="radiologi">Radiologi</SelectItem>
+                  <SelectItem value="icu">ICU</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="po-reference">Referensi PR</Label>
+              <Select>
+                <SelectTrigger id="po-reference">
+                  <SelectValue placeholder="Pilih Purchase Request" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="PR-2025-0042">PR-2025-0042 - Farmasi</SelectItem>
+                  <SelectItem value="PR-2025-0041">PR-2025-0041 - Laboratorium</SelectItem>
+                  <SelectItem value="PR-2025-0040">PR-2025-0040 - Radiologi</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="po-payment-terms">Syarat Pembayaran</Label>
+              <Select defaultValue="14-days">
+                <SelectTrigger id="po-payment-terms">
+                  <SelectValue placeholder="Pilih syarat pembayaran" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="cod">Cash On Delivery</SelectItem>
+                  <SelectItem value="7-days">Net 7 Days</SelectItem>
+                  <SelectItem value="14-days">Net 14 Days</SelectItem>
+                  <SelectItem value="30-days">Net 30 Days</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="po-shipping-method">Metode Pengiriman</Label>
+              <Select>
+                <SelectTrigger id="po-shipping-method">
+                  <SelectValue placeholder="Pilih metode pengiriman" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="vendor-delivery">Pengiriman oleh Supplier</SelectItem>
+                  <SelectItem value="pickup">Diambil Sendiri</SelectItem>
+                  <SelectItem value="3rd-party">Kurir Pihak Ketiga</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="po-notes">Catatan</Label>
+              <Input id="po-notes" placeholder="Catatan tambahan (opsional)" />
+            </div>
+            
+            <div>
+              <Label htmlFor="po-attachment">Lampiran</Label>
+              <div className="flex gap-2 mt-1">
+                <Input id="po-attachment" type="file" className="w-full" />
+                <Button variant="outline" size="icon">
+                  <FileUp className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-6">
+          <Label>Item Purchase Order</Label>
+          <div className="rounded-md border mt-2">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Item</TableHead>
+                  <TableHead>Jumlah</TableHead>
+                  <TableHead>Satuan</TableHead>
+                  <TableHead>Harga Satuan (Rp)</TableHead>
+                  <TableHead>Subtotal (Rp)</TableHead>
+                  <TableHead></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <Input placeholder="Nama item" />
+                  </TableCell>
+                  <TableCell>
+                    <Input type="number" defaultValue="1" min="1" className="w-20" />
+                  </TableCell>
+                  <TableCell>
+                    <Select>
+                      <SelectTrigger className="w-24">
+                        <SelectValue placeholder="Satuan" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="box">Box</SelectItem>
+                        <SelectItem value="pcs">Pcs</SelectItem>
+                        <SelectItem value="unit">Unit</SelectItem>
+                        <SelectItem value="botol">Botol</SelectItem>
+                        <SelectItem value="roll">Roll</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+                  <TableCell>
+                    <Input type="number" defaultValue="0" min="0" />
+                  </TableCell>
+                  <TableCell>
+                    <Input value="0" disabled />
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="ghost" size="icon">
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>
+                    <Input placeholder="Nama item" />
+                  </TableCell>
+                  <TableCell>
+                    <Input type="number" defaultValue="1" min="1" className="w-20" />
+                  </TableCell>
+                  <TableCell>
+                    <Select>
+                      <SelectTrigger className="w-24">
+                        <SelectValue placeholder="Satuan" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="box">Box</SelectItem>
+                        <SelectItem value="pcs">Pcs</SelectItem>
+                        <SelectItem value="unit">Unit</SelectItem>
+                        <SelectItem value="botol">Botol</SelectItem>
+                        <SelectItem value="roll">Roll</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+                  <TableCell>
+                    <Input type="number" defaultValue="0" min="0" />
+                  </TableCell>
+                  <TableCell>
+                    <Input value="0" disabled />
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="ghost" size="icon">
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+          
+          <div className="flex justify-between mt-4">
+            <Button variant="outline">
+              <Plus className="h-4 w-4 mr-2" />
+              Tambah Item
+            </Button>
+            <div className="space-y-2 text-right">
+              <div className="flex justify-end gap-4">
+                <span className="font-medium">Subtotal:</span>
+                <span>Rp 0</span>
+              </div>
+              <div className="flex justify-end gap-4">
+                <span className="font-medium">PPN (11%):</span>
+                <span>Rp 0</span>
+              </div>
+              <div className="flex justify-end gap-4 text-lg font-bold">
+                <span>Total:</span>
+                <span>Rp 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <DialogFooter className="mt-6">
+          <Button variant="outline">Simpan Draft</Button>
+          <Button>Kirim PO</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 const Procurement = () => {
   const dummyPurchaseRequests = [
     { 
@@ -113,14 +540,8 @@ const Procurement = () => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Pembelian & Pengadaan</h1>
           <div className="flex space-x-2">
-            <Button variant="outline">
-              <ClipboardCheck className="mr-2 h-4 w-4" />
-              Buat PR
-            </Button>
-            <Button>
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              Buat PO
-            </Button>
+            <CreatePRDialog />
+            <CreatePODialog />
           </div>
         </div>
         

@@ -11,8 +11,163 @@ import {
   Calendar, 
   Wrench, 
   Boxes,
-  ArrowRight 
+  ArrowRight,
+  FileUp
 } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "@/components/ui/separator";
+
+// Komponen dialog untuk menambahkan aset baru
+const AddAssetDialog = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>
+          <PlusCircle className="mr-2 h-4 w-4" />
+          Tambah Aset Baru
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[700px]">
+        <DialogHeader>
+          <DialogTitle>Tambah Aset Baru</DialogTitle>
+          <DialogDescription>
+            Silahkan isi informasi untuk menambahkan aset baru ke dalam inventaris.
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="grid grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="asset-code">Kode Aset</Label>
+              <Input id="asset-code" value="AST-MD-0125" disabled />
+              <p className="text-sm text-gray-500 mt-1">Kode aset digenerate otomatis</p>
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-name">Nama Aset</Label>
+              <Input id="asset-name" placeholder="Nama aset" />
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-category">Kategori</Label>
+              <Select>
+                <SelectTrigger id="asset-category">
+                  <SelectValue placeholder="Pilih kategori aset" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="alat-medis">Alat Medis</SelectItem>
+                  <SelectItem value="alat-non-medis">Alat Non-Medis</SelectItem>
+                  <SelectItem value="kendaraan">Kendaraan</SelectItem>
+                  <SelectItem value="gedung">Gedung & Bangunan</SelectItem>
+                  <SelectItem value="tanah">Tanah</SelectItem>
+                  <SelectItem value="komputer">Perangkat IT</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-brand">Merk/Model</Label>
+              <Input id="asset-brand" placeholder="Merk/Model aset" />
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-serial">Nomor Seri/IMEI</Label>
+              <Input id="asset-serial" placeholder="Nomor seri/IMEI" />
+            </div>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="asset-acquisition-date">Tanggal Perolehan</Label>
+              <Input id="asset-acquisition-date" type="date" defaultValue={new Date().toISOString().substring(0, 10)} />
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-acquisition-cost">Nilai Perolehan (Rp)</Label>
+              <Input id="asset-acquisition-cost" type="number" min="0" />
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-useful-life">Masa Manfaat (Tahun)</Label>
+              <Input id="asset-useful-life" type="number" min="1" defaultValue="5" />
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-location">Lokasi</Label>
+              <Input id="asset-location" placeholder="Lokasi penempatan aset" />
+            </div>
+            
+            <div>
+              <Label htmlFor="asset-condition">Kondisi</Label>
+              <Select defaultValue="good">
+                <SelectTrigger id="asset-condition">
+                  <SelectValue placeholder="Pilih kondisi aset" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="new">Baru</SelectItem>
+                  <SelectItem value="good">Baik</SelectItem>
+                  <SelectItem value="used">Bekas</SelectItem>
+                  <SelectItem value="damaged">Rusak Ringan</SelectItem>
+                  <SelectItem value="broken">Rusak Berat</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-4 space-y-4">
+          <div>
+            <Label htmlFor="asset-description">Deskripsi/Spesifikasi</Label>
+            <Textarea id="asset-description" placeholder="Deskripsi atau spesifikasi aset" rows={3} />
+          </div>
+          
+          <div>
+            <Label htmlFor="asset-attachment">Dokumen/Foto</Label>
+            <div className="flex gap-2 mt-1">
+              <Input id="asset-attachment" type="file" className="w-full" />
+              <Button variant="outline" size="icon">
+                <FileUp className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+        
+        <Separator className="my-4" />
+        
+        <div>
+          <Label>Informasi Penyusutan</Label>
+          <div className="grid grid-cols-2 gap-4 mt-2">
+            <div>
+              <Label htmlFor="asset-depreciation-method" className="text-xs">Metode Penyusutan</Label>
+              <Select defaultValue="straight-line">
+                <SelectTrigger id="asset-depreciation-method">
+                  <SelectValue placeholder="Pilih metode" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="straight-line">Garis Lurus</SelectItem>
+                  <SelectItem value="double-declining">Double Declining</SelectItem>
+                  <SelectItem value="sum-of-years">Sum of the Years' Digits</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label htmlFor="asset-salvage-value" className="text-xs">Nilai Residu (Rp)</Label>
+              <Input id="asset-salvage-value" type="number" min="0" defaultValue="0" />
+            </div>
+          </div>
+        </div>
+        
+        <DialogFooter className="mt-6">
+          <Button variant="outline">Batal</Button>
+          <Button>Simpan Aset</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 const Inventory = () => {
   const dummyAssets = [
@@ -93,10 +248,7 @@ const Inventory = () => {
       <div className="px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Inventaris & Aset Tetap</h1>
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Tambah Aset Baru
-          </Button>
+          <AddAssetDialog />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
