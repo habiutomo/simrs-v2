@@ -1,0 +1,111 @@
+🏥 Modul Utama Aplikasi Rumah Sakit (HIS)
+1. Modul Pendaftaran & Registrasi Pasien
+•	Pendaftaran pasien baru & lama
+•	Nomor Rekam Medis Otomatis
+•	Antrian online dan offline
+•	Penjadwalan dokter
+•	Pencatatan rujukan masuk dan keluar
+•	Laporan kunjungan harian
+2. Modul Rawat Jalan (Outpatient)
+•	Rekam medis rawat jalan
+•	SOAP (Subjective, Objective, Assessment, Plan)
+•	Riwayat kunjungan pasien
+•	Template diagnosis dan tindakan
+•	e-Prescription (Resep elektronik)
+•	Integrasi dengan lab, radiologi, farmasi
+3. Modul Rawat Inap (Inpatient)
+•	Pencatatan masuk/keluar pasien
+•	Pengelolaan kamar & tempat tidur
+•	Jadwal visit dokter dan perawat
+•	Catatan keperawatan
+•	Manajemen diet pasien
+•	Monitoring tindakan dan pengobatan
+•	Biaya harian rawat inap
+4. Modul IGD (Instalasi Gawat Darurat)
+•	Triage pasien
+•	Waktu tanggap layanan
+•	Observasi awal pasien
+•	Penginputan tindakan cepat
+•	Pelaporan kasus emergensi
+5. Modul Rekam Medis Elektronik (EMR)
+•	Riwayat medis lengkap pasien
+•	Hasil penunjang (lab, radiologi, dll)
+•	Lampiran file hasil pemeriksaan
+•	Hak akses berdasarkan profesi
+•	Digital signature dokter/perawat
+6. Modul Penunjang Medis
+6.1 Laboratorium
+•	Order & hasil lab otomatis
+•	Cetak hasil lab dengan format standar
+•	Validasi hasil oleh analis & dokter
+6.2 Radiologi
+•	Order & laporan radiologi
+•	Integrasi dengan PACS (jika ada)
+•	Gambar hasil rontgen, USG, CT-Scan
+6.3 Farmasi
+•	Stok obat
+•	E-resep & dispensing
+•	Permintaan dan pemakaian internal
+•	Kadaluarsa & peringatan stok minimum
+6.4 Rehabilitasi Medik (Fisioterapi)
+•	Jadwal terapi
+•	Catatan tindakan terapi
+•	Evaluasi kondisi pasien
+________________________________________
+💰 Modul Keuangan dan Akuntansi Rumah Sakit
+1. Modul Kasir dan Penagihan
+•	Biaya otomatis dari layanan (tindakan, obat, rawat inap)
+•	Cetak billing pasien
+•	Pembayaran tunai/non-tunai
+•	Pembayaran bertahap / deposit
+•	Diskon, piutang, penyesuaian tarif
+2. Modul Asuransi / BPJS
+•	Klaim dan bridging BPJS
+•	Data INA-CBG
+•	Pelaporan klaim asuransi swasta
+•	Validasi SEP dan verifikasi pelayanan
+3. Modul Akuntansi Umum
+•	Buku besar, jurnal, neraca, laba rugi
+•	COA (Chart of Account) terstruktur
+•	Akuntansi akrual dan kas
+•	Integrasi dengan kasir & pembayaran supplier
+4. Modul Pembelian & Pengadaan
+•	Permintaan barang (PR)
+•	Purchase Order (PO)
+•	Penerimaan barang (GRN)
+•	Pencatatan faktur & retur
+•	Pembayaran supplier
+5. Modul Inventaris & Aset Tetap
+•	Data aset (alat medis, kendaraan, bangunan)
+•	Jadwal penyusutan
+•	Jadwal pemeliharaan
+•	Mutasi & penghapusan aset
+________________________________________
+👨‍💼 Modul HRD (Sumber Daya Manusia)
+1. Manajemen Data Karyawan
+•	Data lengkap karyawan (identitas, jabatan, unit)
+•	Kontrak kerja dan riwayatnya
+•	Riwayat pelatihan dan sertifikasi medis
+2. Presensi & Jadwal Kerja
+•	Jadwal shift
+•	Integrasi fingerprint / face recognition
+•	Laporan kehadiran dan keterlambatan
+•	Izin, cuti, lembur
+3. Modul Payroll / Penggajian
+•	Komponen gaji: pokok, tunjangan, potongan
+•	Hitung PPh 21 otomatis
+•	BPJS Kesehatan & Ketenagakerjaan
+•	Slip gaji digital
+•	Payroll transfer bank
+4. Penilaian Kinerja & Kompetensi
+•	KPI dan evaluasi periodik
+•	Penilaian kinerja per jabatan
+•	Pengembangan karir dan pelatihan
+________________________________________
+🔗 Integrasi Antar Modul
+•	Integrasi dokter dan farmasi via e-resep
+•	Integrasi pembayaran pasien ke keuangan
+•	Integrasi penggajian dengan jadwal kerja dan presensi
+•	Integrasi lab/radiologi dengan rekam medis
+•	Integrasi data pasien dengan klaim BPJS (Bridging INA-CBG & SEP)
+
