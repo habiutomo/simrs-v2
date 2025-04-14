@@ -13,7 +13,12 @@ import {
   CreditCard, 
   BarChart, 
   Zap,
-  Stethoscope
+  Stethoscope,
+  DollarSign,
+  ShoppingCart,
+  Briefcase,
+  Building,
+  UserCog
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
@@ -28,15 +33,15 @@ interface SidebarLinkProps {
 const SidebarLink = ({ href, icon, children, active }: SidebarLinkProps) => {
   return (
     <Link href={href}>
-      <a 
+      <div 
         className={cn(
-          "flex items-center px-4 py-2 text-gray-600 rounded-md group transition-colors",
+          "flex items-center px-4 py-2 text-gray-600 rounded-md group transition-colors cursor-pointer",
           active ? "bg-blue-50 text-blue-600 border-l-2 border-blue-600" : "hover:bg-gray-50"
         )}
       >
         <span className="w-5 h-5 mr-3">{icon}</span>
         {children}
-      </a>
+      </div>
     </Link>
   );
 };
@@ -64,6 +69,14 @@ const Sidebar = () => {
     { label: "Laboratorium", href: "/laboratory", icon: <Stethoscope className="w-5 h-5" /> },
     { label: "Radiologi", href: "/radiology", icon: <Activity className="w-5 h-5" /> },
     { label: "Billing", href: "/billing", icon: <CreditCard className="w-5 h-5" /> },
+    // Finance & Accounting
+    { label: "Akuntansi Umum", href: "/accounting", icon: <DollarSign className="w-5 h-5" /> },
+    { label: "Pembelian & Pengadaan", href: "/procurement", icon: <ShoppingCart className="w-5 h-5" /> },
+    { label: "Inventaris & Aset", href: "/inventory", icon: <Building className="w-5 h-5" /> },
+    // HR Modules
+    { label: "Kepegawaian (HRD)", href: "/hr", icon: <UserCog className="w-5 h-5" /> },
+    { label: "Payroll", href: "/payroll", icon: <Briefcase className="w-5 h-5" /> },
+    // Reports & System
     { label: "Laporan & Analitik", href: "/reports", icon: <BarChart className="w-5 h-5" /> },
     { label: "Integrasi Sistem", href: "/system-integration", icon: <Zap className="w-5 h-5" /> },
   ];
