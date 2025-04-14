@@ -226,6 +226,34 @@ const SystemIntegration = () => {
               </Card>
               
               <Card>
+                <CardHeader className="flex justify-between items-center">
+                  <CardTitle>CMS Properti</CardTitle>
+                  <Button onClick={() => window.open('/cms/properties', '_blank')} variant="outline">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Buka CMS
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="grid w-full items-center gap-1.5">
+                      <Label htmlFor="cms-api-key">API Key</Label>
+                      <Input id="cms-api-key" placeholder="Masukkan API Key CMS" />
+                    </div>
+                    
+                    <div className="grid w-full items-center gap-1.5">
+                      <Label htmlFor="cms-url">URL Endpoint</Label>
+                      <Input id="cms-url" placeholder="URL API CMS" />
+                    </div>
+                    
+                    <div className="flex items-center space-x-2">
+                      <Switch id="cms-active" />
+                      <Label htmlFor="cms-active">Aktifkan Integrasi CMS</Label>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
                 <CardHeader>
                   <CardTitle>Konfigurasi Sistem Rujukan Nasional</CardTitle>
                 </CardHeader>
