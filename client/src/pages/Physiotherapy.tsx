@@ -200,12 +200,90 @@ const Physiotherapy = () => {
                               </div>
                             </div>
                             <DialogFooter>
-                              <Button variant="outline" type="button">
-                                Edit Jadwal
-                              </Button>
-                              <Button type="button">
-                                Mulai Terapi
-                              </Button>
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button variant="outline" type="button">
+                                    Edit Jadwal
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[425px]">
+                                  <DialogHeader>
+                                    <DialogTitle>Edit Jadwal Terapi</DialogTitle>
+                                    <DialogDescription>
+                                      Ubah jadwal terapi pasien
+                                    </DialogDescription>
+                                  </DialogHeader>
+                                  <div className="grid gap-4 py-4">
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                      <Label htmlFor="date" className="text-right">
+                                        Tanggal
+                                      </Label>
+                                      <Input
+                                        type="datetime-local"
+                                        id="date"
+                                        defaultValue="2024-02-12T09:00"
+                                        className="col-span-3"
+                                      />
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                      <Label htmlFor="therapist" className="text-right">
+                                        Terapis
+                                      </Label>
+                                      <select className="col-span-3 flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors">
+                                        <option value="1">Dr. Sari</option>
+                                        <option value="2">Dr. Budi</option>
+                                        <option value="3">Dr. Andi</option>
+                                      </select>
+                                    </div>
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                      <Label htmlFor="notes" className="text-right">
+                                        Catatan
+                                      </Label>
+                                      <Textarea
+                                        id="notes"
+                                        defaultValue="Pasien perlu latihan motorik halus"
+                                        className="col-span-3"
+                                      />
+                                    </div>
+                                  </div>
+                                  <DialogFooter>
+                                    <Button type="submit">Simpan Perubahan</Button>
+                                  </DialogFooter>
+                                </DialogContent>
+                              </Dialog>
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button type="button">
+                                    Mulai Terapi
+                                  </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[425px]">
+                                  <DialogHeader>
+                                    <DialogTitle>Mulai Sesi Terapi</DialogTitle>
+                                    <DialogDescription>
+                                      Konfirmasi untuk memulai sesi terapi
+                                    </DialogDescription>
+                                  </DialogHeader>
+                                  <div className="py-4">
+                                    <p className="text-sm text-gray-500">
+                                      Anda akan memulai sesi terapi untuk:
+                                    </p>
+                                    <div className="mt-2 space-y-2">
+                                      <p className="text-sm"><span className="font-medium">Pasien:</span> Ahmad Yani</p>
+                                      <p className="text-sm"><span className="font-medium">Jenis Terapi:</span> Terapi Okupasi</p>
+                                      <p className="text-sm"><span className="font-medium">Terapis:</span> Dr. Sari</p>
+                                    </div>
+                                  </div>
+                                  <DialogFooter>
+                                    <Button variant="outline" type="button">
+                                      Batal
+                                    </Button>
+                                    <Button type="submit">
+                                      Mulai Sesi
+                                    </Button>
+                                  </DialogFooter>
+                                </DialogContent>
+                              </Dialog>
                             </DialogFooter>
                           </DialogContent>
                         </Dialog>
