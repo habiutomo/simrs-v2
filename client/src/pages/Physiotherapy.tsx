@@ -6,6 +6,9 @@ import { Calendar, PlusCircle, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 const Physiotherapy = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,10 +18,79 @@ const Physiotherapy = () => {
       <div className="px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Rehabilitasi Medik (Fisioterapi)</h1>
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Tambah Jadwal Terapi
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button>
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Tambah Jadwal Terapi
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Tambah Jadwal Terapi</DialogTitle>
+                <DialogDescription>
+                  Buat jadwal terapi baru untuk pasien
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Pasien
+                  </Label>
+                  <Input
+                    id="name"
+                    placeholder="Cari nama pasien"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="therapy" className="text-right">
+                    Jenis Terapi
+                  </Label>
+                  <select className="col-span-3 flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50">
+                    <option value="">Pilih jenis terapi</option>
+                    <option value="okupasi">Terapi Okupasi</option>
+                    <option value="fisik">Terapi Fisik</option>
+                    <option value="wicara">Terapi Wicara</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="date" className="text-right">
+                    Tanggal
+                  </Label>
+                  <Input
+                    type="datetime-local"
+                    id="date"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="therapist" className="text-right">
+                    Terapis
+                  </Label>
+                  <select className="col-span-3 flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50">
+                    <option value="">Pilih terapis</option>
+                    <option value="1">Dr. Sari</option>
+                    <option value="2">Dr. Budi</option>
+                    <option value="3">Dr. Andi</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="notes" className="text-right">
+                    Catatan
+                  </Label>
+                  <Textarea
+                    id="notes"
+                    placeholder="Tambahkan catatan jika diperlukan"
+                    className="col-span-3"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button type="submit">Simpan Jadwal</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
 
         <Card className="mb-6">
