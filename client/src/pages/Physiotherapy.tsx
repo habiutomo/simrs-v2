@@ -10,10 +10,13 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+import { useToast } from "@/hooks/use-toast";
+
 const Physiotherapy = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSession, setActiveSession] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const { toast } = useToast();
 
   return (
     <div className="py-6">
