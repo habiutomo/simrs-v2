@@ -12,6 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 
 const Physiotherapy = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeSession, setActiveSession] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState(null);
 
   return (
     <div className="py-6">
@@ -281,13 +283,17 @@ const Physiotherapy = () => {
                                       Batal
                                     </Button>
                                     <Button type="submit" onClick={() => {
-                                      // Handle session start
-                                      const updatedRow = {
-                                        status: "in-progress",
+                                      setActiveSession(true);
+                                      setSelectedPatient({
+                                        id: "RM-2024-001",
+                                        name: "Ahmad Yani",
+                                        therapy: "Terapi Okupasi",
                                         startTime: new Date().toISOString()
-                                      };
-                                      // Update status in table
-                                      // Close dialog
+                                      });
+                                      toast({
+                                        title: "Sesi Terapi Dimulai",
+                                        description: "Sesi terapi untuk Ahmad Yani telah dimulai"
+                                      });
                                     }}>
                                       Mulai Sesi
                                     </Button>
