@@ -29,6 +29,7 @@ import Payroll from "./pages/Payroll";
 // Reports & System
 import Reports from "./pages/Reports";
 import SystemIntegration from "./pages/SystemIntegration";
+import Physiotherapy from "./pages/Physiotherapy";
 import NotFound from "@/pages/not-found";
 
 function App() {
@@ -78,6 +79,7 @@ function AppContent() {
             {/* Reports & System */}
             <Route path="/reports" component={Reports} />
             <Route path="/system-integration" component={SystemIntegration} />
+            <Route path="/physiotherapy" component={Physiotherapy} />
             <Route component={NotFound} />
           </Switch>
         </main>

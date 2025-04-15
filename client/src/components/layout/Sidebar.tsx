@@ -67,6 +67,7 @@ const Sidebar = () => {
     { label: "Farmasi", href: "/pharmacy", icon: <FlaskRound className="w-5 h-5" /> },
     { label: "Laboratorium", href: "/laboratory", icon: <Stethoscope className="w-5 h-5" /> },
     { label: "Radiologi", href: "/radiology", icon: <Activity className="w-5 h-5" /> },
+    { label: "Rehabilitasi Medik", href: "/physiotherapy", icon: <Activity className="w-5 h-5" /> },
     { label: "Billing", href: "/billing", icon: <CreditCard className="w-5 h-5" /> },
     // Finance & Accounting
     { label: "Akuntansi Umum", href: "/accounting", icon: <DollarSign className="w-5 h-5" /> },
