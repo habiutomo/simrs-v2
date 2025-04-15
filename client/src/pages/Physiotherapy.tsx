@@ -146,8 +146,8 @@ const Physiotherapy = () => {
                       <TableCell>Terapi Okupasi</TableCell>
                       <TableCell>Dr. Sari</TableCell>
                       <TableCell>
-                        <span className="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
-                          Terjadwal
+                        <span className="px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
+                          Sedang Terapi
                         </span>
                       </TableCell>
                       <TableCell>
@@ -275,10 +275,20 @@ const Physiotherapy = () => {
                                     </div>
                                   </div>
                                   <DialogFooter>
-                                    <Button variant="outline" type="button">
+                                    <Button variant="outline" type="button" onClick={() => {
+                                      // Handle close dialog
+                                    }}>
                                       Batal
                                     </Button>
-                                    <Button type="submit">
+                                    <Button type="submit" onClick={() => {
+                                      // Handle session start
+                                      const updatedRow = {
+                                        status: "in-progress",
+                                        startTime: new Date().toISOString()
+                                      };
+                                      // Update status in table
+                                      // Close dialog
+                                    }}>
                                       Mulai Sesi
                                     </Button>
                                   </DialogFooter>
