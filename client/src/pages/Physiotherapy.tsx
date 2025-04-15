@@ -151,10 +151,64 @@ const Physiotherapy = () => {
                         </span>
                       </TableCell>
                       <TableCell>
-                        <Button variant="outline" size="sm">
-                          <Calendar className="h-4 w-4 mr-1" />
-                          Detail
-                        </Button>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" size="sm">
+                              <Calendar className="h-4 w-4 mr-1" />
+                              Detail
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                              <DialogTitle>Detail Terapi</DialogTitle>
+                              <DialogDescription>
+                                Informasi lengkap jadwal terapi
+                              </DialogDescription>
+                            </DialogHeader>
+                            <div className="grid gap-4 py-4">
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right font-medium">Pasien:</Label>
+                                <div className="col-span-3">Ahmad Yani</div>
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">  
+                                <Label className="text-right font-medium">No. RM:</Label>
+                                <div className="col-span-3">RM-2024-001</div>
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right font-medium">Jadwal:</Label>
+                                <div className="col-span-3">12 Feb 2024 09:00</div>
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right font-medium">Jenis:</Label>
+                                <div className="col-span-3">Terapi Okupasi</div>
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right font-medium">Terapis:</Label>
+                                <div className="col-span-3">Dr. Sari</div>
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right font-medium">Status:</Label>
+                                <div className="col-span-3">
+                                  <span className="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
+                                    Terjadwal
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="grid grid-cols-4 items-center gap-4">
+                                <Label className="text-right font-medium">Catatan:</Label>
+                                <div className="col-span-3">Pasien perlu latihan motorik halus</div>
+                              </div>
+                            </div>
+                            <DialogFooter>
+                              <Button variant="outline" type="button">
+                                Edit Jadwal
+                              </Button>
+                              <Button type="button">
+                                Mulai Terapi
+                              </Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
                       </TableCell>
                     </TableRow>
                   </TableBody>
